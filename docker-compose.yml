@@ -4,11 +4,11 @@ services:
     working_dir: /var/www/html
     extra_hosts:
       - host.docker.internal:host-gateway
+    command: cp config-sample.php config.php
     volumes:
       - '.:/var/www/html'
       - './docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini'
-    commands:
-      - cp config-sample.php config.php
+
   nginx:
     image: 'nginx:1.23.3-alpine'
     working_dir: /var/www/html
