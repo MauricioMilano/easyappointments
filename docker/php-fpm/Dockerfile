@@ -7,6 +7,7 @@ RUN apt-get update \
         git \
         zip \
         unzip \
+    && cp config-sample.php config.php
     && curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s \
         curl gd intl ldap mbstring mysqli odbc pdo pdo_mysql soap sockets xml zip xdebug exif sqlite3 gettext bcmath csv event imap inotify redis \
     && docker-php-ext-enable xdebug \
@@ -25,6 +26,6 @@ RUN apt-get update \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    && cp config-sample.php config.php
+  
 
 CMD ["bash", "docker/php-fpm/start-container"]
